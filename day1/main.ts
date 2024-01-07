@@ -1,40 +1,40 @@
-import fs from 'fs';
+import fs from "fs";
 
+// Day 1 Part 1
 
-function getNumber(line: string){
+function getNumber(line: string) {
+  let firstNumber: number | null = null;
+  let lastNumber: number | null = null;
 
-    let firstNumber: number | null = null;
-    let lastNumber: number | null = null;
-
-    for(let value of line){
-        if(/\d/.test(value)){
-            const currentNumber = Number(value);
-            if(firstNumber === null){
-                firstNumber = currentNumber;
-        }
-            lastNumber = currentNumber;
-        }
+  for (let value of line) {
+    if (/\d/.test(value)) {
+      const currentNumber = Number(value);
+      if (firstNumber === null) {
+        firstNumber = currentNumber;
+      }
+      lastNumber = currentNumber;
     }
-    if (firstNumber !== null && lastNumber !== null){
-        const combinedNumber = Number(`${firstNumber}${lastNumber}`);
-        return combinedNumber;
-    }
-    return null;
+  }
+  if (firstNumber !== null && lastNumber !== null) {
+    const combinedNumber = Number(`${firstNumber}${lastNumber}`);
+    return combinedNumber;
+  }
+  return null;
 }
 
 let sum = 0;
 
-fs.readFile('data.txt', 'utf8', (err, data) => {
-    if(err){
-        console.log(err);
-        return;
+fs.readFile("data.txt", "utf8", (err, data) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  const lines = data.split("\n");
+  for (let line of lines) {
+    const a = getNumber(line);
+    if (a !== null) {
+      sum += a;
     }
-    const lines = data.split('\n');
-    for(let line of lines){
-       const a =  getNumber(line);
-       if(a !== null){
-           sum += a;
-       }
-    }
-    console.log(sum);
+  }
+  console.log(sum);
 });
